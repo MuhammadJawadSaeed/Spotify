@@ -1,16 +1,116 @@
-# React + Vite
+# Spotify Clone Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The **Frontend** is a Single Page Application (SPA) built with React and Vite. It serves as the user interface for the Spotify Clone, allowing users to listen to music, and artists to upload and manage their tracks.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [Project Structure](#project-structure)
+- [Routes](#routes)
+- [Configuration](#configuration)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **User Authentication**: Login and Registration pages.
+- **Music Playback**: Dedicated music player interface.
+- **Artist Dashboard**: Interface for artists to view their content.
+- **Music Upload**: Functionality for artists to upload new tracks and cover images.
+- **Real-time Synchronization**: Listens for playback events via Socket.io to synchronize state across devices.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Framework**: [React](https://react.dev/) (v19)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Routing**: [React Router DOM](https://reactrouter.com/) (v7)
+- **HTTP Client**: [Axios](https://axios-http.com/)
+- **Real-time**: [Socket.io Client](https://socket.io/)
+- **Styling**: CSS Modules / Standard CSS
+
+## Prerequisites
+
+Ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v16+ recommended)
+
+## Installation
+
+1.  Navigate to the `frontend` directory:
+
+    ```bash
+    cd frontend
+    ```
+
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+## Running the Application
+
+### Development Mode
+
+Starts the Vite development server.
+
+```bash
+npm run dev
+```
+
+The application will typically run on `http://localhost:5173`.
+
+### Production Build
+
+Builds the application for production.
+
+```bash
+npm run build
+```
+
+### Preview Production Build
+
+Previews the built application.
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```
+frontend/
+├── public/             # Static assets
+├── src/
+│   ├── assets/         # Source assets (images, icons)
+│   ├── pages/          # Page components
+│   │   ├── artist/     # Artist-specific pages (Dashboard, Upload)
+│   │   ├── music/      # Music-specific pages (Player)
+│   │   ├── Home.jsx    # Home page
+│   │   ├── Login.jsx   # Login page
+│   │   └── Register.jsx# Registration page
+│   ├── App.css         # Global styles
+│   ├── App.jsx         # Main application component & Routing
+│   └── main.jsx        # Entry point
+├── index.html          # HTML template
+├── package.json        # Dependencies and scripts
+└── vite.config.js      # Vite configuration
+```
+
+## Routes
+
+| Path                             | Component         | Description                  |
+| :------------------------------- | :---------------- | :--------------------------- |
+| `/`                              | `Home`            | Main landing page.           |
+| `/register`                      | `Register`        | User registration.           |
+| `/login`                         | `Login`           | User login.                  |
+| `/artist/dashboard`              | `ArtistDashboard` | Dashboard for artists.       |
+| `/artist/dashboard/upload-music` | `UploadMusic`     | Form to upload new music.    |
+| `/music/:id`                     | `MusicPlayer`     | Player for a specific track. |
+
+## Configuration
+
+The application connects to backend services. Ensure the backend services are running on their expected ports.
+
+- **Socket.io Connection**: Configured in `App.jsx` to connect to `http://localhost:3002` (Music Service).
